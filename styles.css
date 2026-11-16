@@ -211,13 +211,13 @@ h2 {
 .contato-direto { font-weight: 600; color: var(--preto) !important; line-height: 1.9; }
 form { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-content: start; }
 label { display: grid; gap: 6px; font-weight: 500; font-size: .95rem; }
-label.full, form .erro, form button { grid-column: 1 / -1; }
+label.full, form .erro, .form-botoes { grid-column: 1 / -1; }
+.form-botoes { display: flex; flex-wrap: wrap; gap: 12px; }
 input, select, textarea {
   font: inherit; color: var(--preto); background: #F8F9F7;
   border: 1.5px solid #B9BFBA; border-radius: 6px; padding: 12px 14px; width: 100%;
 }
 input:focus, select:focus, textarea:focus { border-color: var(--petroleo); outline: none; box-shadow: 0 0 0 3px rgba(11,66,71,.25); }
-form button { justify-self: start; }
 .erro { margin: 0; color: #B3261E; font-weight: 500; min-height: 1.2em; }
 @media (max-width: 760px) { .contato, form { grid-template-columns: 1fr; } }
 

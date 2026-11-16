@@ -62,25 +62,46 @@ dialog.addEventListener('click', (e) => { if (e.target === dialog) fechar(); });
 dialog.addEventListener('close', () => { quadro.innerHTML = ''; });
 
 // ---------- Formulário de orçamento ----------
-// Abre o e-mail já preenchido. Para receber os pedidos direto,
-// troque por um serviço como Formspree ou Netlify Forms.
+// Dois caminhos: WhatsApp (abre a conversa com a mensagem pronta) ou e-mail.
+const WHATSAPP_NUMERO = '5551993179195';   // só números, com 55 + DDD. Ex.: 5511999998888
+const EMAIL_ORCAMENTO = 'atendeaicarol@gmail.com';
+
 const form = document.getElementById('form-orcamento');
 const erro = document.getElementById('form-erro');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
+  const canal = e.submitter?.value || 'whatsapp';
   const d = Object.fromEntries(new FormData(form));
   if (!d.nome.trim() || !d.mensagem.trim()) {
     erro.textContent = 'Preencha seu nome e conte sobre o projeto.';
     return;
   }
-  if (!/^\S+@\S+\.\S+$/.test(d.email)) {
+  if (canal === 'email' && !/^\S+@\S+\.\S+$/.test(d.email)) {
     erro.textContent = 'Digite um e-mail válido, como nome@agencia.com.';
     return;
   }
+  if (d.email && !/^\S+@\S+\.\S+$/.test(d.email)) {
+    erro.textContent = 'O e-mail parece incompleto. Confira ou deixe em branco.';
+    return;
+  }
   erro.textContent = '';
-  const assunto = `Orçamento: ${d.tipo} — ${d.empresa || d.nome}`;
-  const corpo = `Nome: ${d.nome}\nE-mail: ${d.email}\nAgência/empresa: ${d.empresa || '—'}\nServiço: ${d.tipo}\n\n${d.mensagem}`;
-  location.href = `mailto:atendeaicarol@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+  const quem = d.empresa || d.nome;
+  const linhas = [
+    `Nome: ${d.nome}`,
+    d.email ? `E-mail: ${d.email}` : null,
+    `Agência/empresa: ${d.empresa || '—'}`,
+    `Serviço: ${d.tipo}`,
+    '',
+    d.mensagem,
+  ].filter((l) => l !== null);
+
+  if (canal === 'whatsapp') {
+    const texto = `Olá, Bliss! Gostaria de pedir um orçamento.\n\n${linhas.join('\n')}`;
+    window.open(`https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+  } else {
+    const assunto = `Orçamento: ${d.tipo} — ${quem}`;
+    location.href = `mailto:${EMAIL_ORCAMENTO}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(linhas.join('\n'))}`;
+  }
 });
 
 // ---------- Menu do topo ----------
