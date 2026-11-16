@@ -183,6 +183,8 @@ h2 {
 .sobre { background: var(--papel-2); }
 .sobre-intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px 56px; margin-bottom: clamp(48px, 7vw, 96px); }
 .sobre-intro p { margin: 0; max-width: 46ch; color: var(--cinza); }
+.sobre-texto p + p { margin-top: 16px; }
+.sobre-texto p:last-child { color: var(--preto); font-weight: 600; }
 .sobre-intro .sobre-lead {
   color: var(--preto); font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.2;
   font-weight: 700; font-variation-settings: "wdth" 100; letter-spacing: -0.015em; max-width: 26ch;
