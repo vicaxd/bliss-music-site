@@ -42,16 +42,17 @@ addEventListener('resize', () => {
   for (const b of barras) b.classList.add('tocado');
 });
 
-// ---------- Player de vídeo (Vimeo) ----------
-// A miniatura é só uma imagem; o player do Vimeo só carrega quando a pessoa clica.
+// ---------- Player de vídeo (YouTube) ----------
+// A capa é só uma imagem; o player do YouTube só carrega quando a pessoa clica.
+// youtube-nocookie não grava cookies de rastreamento; rel=0 mostra só vídeos do próprio canal no fim.
 const dialog = document.getElementById('player');
 const quadro = dialog.querySelector('.player-quadro');
 document.querySelectorAll('.play').forEach((btn) => {
   btn.addEventListener('click', () => {
     const id = btn.dataset.video;
     quadro.classList.toggle('vertical', btn.dataset.ratio === '9/16');
-    quadro.innerHTML = `<iframe src="https://player.vimeo.com/video/${id}?autoplay=1&title=0&byline=0&portrait=0"
-      allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${btn.getAttribute('aria-label')}"></iframe>`;
+    quadro.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1"
+      allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen title="${btn.getAttribute('aria-label')}"></iframe>`;
     dialog.showModal();
   });
 });
