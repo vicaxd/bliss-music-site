@@ -34,10 +34,9 @@ h2 {
 .topo {
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
   padding: 16px var(--gutter); position: sticky; top: 0; z-index: 5;
-  background: color-mix(in srgb, var(--papel) 90%, transparent);
-  backdrop-filter: blur(8px);
+  background: var(--papel);
 }
-.marca { display: block; line-height: 0; }
+.marca { display: block; line-height: 0; isolation: isolate; background: var(--papel); }
 .marca img { height: clamp(40px, 3.8vw, 52px); width: auto; mix-blend-mode: multiply; }
 .menu { position: relative; }
 .menu-botao {
