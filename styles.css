@@ -177,8 +177,8 @@ h2 {
   color: var(--preto); font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.2;
   font-weight: 700; font-variation-settings: "wdth" 100; letter-spacing: -0.015em; max-width: 26ch;
 }
-.pessoas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: start; }
-.pessoa { display: grid; grid-template-columns: minmax(120px, 0.8fr) minmax(0, 1.2fr); gap: 24px; align-items: start; }
+.pessoas { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(48px, 6vw, 80px); }
+.pessoa { display: grid; grid-template-columns: clamp(180px, 22vw, 300px) minmax(0, 62ch); gap: clamp(24px, 4vw, 56px); align-items: start; }
 .foto { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%; border-radius: 6px; }
 .foto-vazia {
   display: grid; place-items: center; background: var(--cor); color: #fff;
@@ -186,13 +186,12 @@ h2 {
 }
 .pessoa h3 { font-size: 1.75rem; font-weight: 900; font-variation-settings: "wdth" 115; letter-spacing: -0.02em; }
 .cargo { margin: 8px 0 16px; font-weight: 600; color: var(--petroleo); }
-.pessoa-texto p { max-width: 40ch; }
+.pessoa-texto p { max-width: 62ch; }
 .pessoa-texto > p:not(.cargo):not(.links-pessoa) { margin: 0 0 12px; color: var(--cinza); }
 .links-pessoa { margin: 16px 0 0; font-weight: 600; }
 .links-pessoa a { margin-right: 16px; }
-@media (max-width: 960px) { .pessoas { grid-template-columns: 1fr; } }
 @media (max-width: 760px) { .sobre-intro { grid-template-columns: 1fr; } }
-@media (max-width: 480px) { .pessoa { grid-template-columns: 1fr; } .foto { max-width: 260px; } }
+@media (max-width: 600px) { .pessoa { grid-template-columns: 1fr; } .foto { max-width: 280px; } }
 
 /* Contato */
 .contato { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 48px; }
