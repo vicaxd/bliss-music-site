@@ -81,3 +81,20 @@ form.addEventListener('submit', (e) => {
   const corpo = `Nome: ${d.nome}\nE-mail: ${d.email}\nAgência/empresa: ${d.empresa || '—'}\nServiço: ${d.tipo}\n\n${d.mensagem}`;
   location.href = `mailto:atendeaicarol@gmail.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
 });
+
+// ---------- Menu do topo ----------
+const menuBotao = document.querySelector('.menu-botao');
+const menuLista = document.getElementById('menu-lista');
+function abrirMenu(abrir) {
+  menuBotao.setAttribute('aria-expanded', String(abrir));
+  menuLista.hidden = !abrir;
+  if (abrir) menuLista.querySelector('a').focus();
+}
+menuBotao.addEventListener('click', () => abrirMenu(menuLista.hidden));
+menuLista.addEventListener('click', (e) => { if (e.target.closest('a')) abrirMenu(false); });
+document.addEventListener('click', (e) => {
+  if (!menuLista.hidden && !e.target.closest('.menu')) abrirMenu(false);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !menuLista.hidden) { abrirMenu(false); menuBotao.focus(); }
+});

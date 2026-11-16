@@ -30,12 +30,16 @@
       </svg>
       <span class="marca-nome">Bliss</span><span class="marca-sub">music</span>
     </a>
-    <nav aria-label="Principal">
-      <ul>
+    <nav class="menu" aria-label="Principal">
+      <button class="menu-botao" type="button" aria-expanded="false" aria-controls="menu-lista">
+        Menu
+        <span class="menu-icone" aria-hidden="true"></span>
+      </button>
+      <ul id="menu-lista" class="menu-lista" hidden>
         <li><a href="#trabalhos">Trabalhos</a></li>
         <li><a href="#servicos">Serviços</a></li>
         <li><a href="#sobre">Sobre</a></li>
-        <li><a class="nav-cta" href="#contato">Pedir orçamento</a></li>
+        <li><a href="#contato">Pedir orçamento</a></li>
       </ul>
     </nav>
   </header>
