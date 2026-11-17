@@ -120,3 +120,4 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && !menuLista.hidden) { abrirMenu(false); menuBotao.focus(); }
 });
+

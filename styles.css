@@ -162,6 +162,12 @@ h2 {
 .servicos dt { font-size: 1.6rem; font-weight: 800; font-variation-settings: "wdth" 110; letter-spacing: -0.02em; margin-bottom: 10px; }
 .servicos dd { margin: 0; color: rgba(238,240,236,.75); max-width: 38ch; }
 
+/* Galeria (fotos do estúdio) */
+.galeria-lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 200px)); gap: 10px; }
+.quadro { display: block; width: 100%; height: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; background: var(--petroleo); }
+.foto-destaque { grid-column: span 2; grid-row: span 2; }
+@media (max-width: 560px) { .galeria-lista { grid-template-columns: repeat(2, minmax(0, 1fr)); } .foto-destaque { grid-row: auto; } }
+
 /* Sobre */
 .sobre { background: var(--papel-2); }
 .sobre-intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px 56px; margin-bottom: clamp(48px, 7vw, 96px); }
