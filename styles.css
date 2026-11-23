@@ -155,6 +155,39 @@ h2 {
 }
 @media (max-width: 560px) { .obras { grid-template-columns: 1fr; } }
 
+/* Peças de rádio */
+.radio { background: var(--papel-2); }
+.audios {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 20px;
+}
+.audio { background: var(--papel); border-radius: 6px; padding: 20px; }
+.audio-topo { display: flex; align-items: center; gap: 16px; }
+.audio h3 { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.01em; }
+.audio .ficha { margin-top: 4px; }
+.audio-play {
+  flex: none; width: 52px; height: 52px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+  background: var(--laranja) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5v14l11-7z' fill='%23000'/%3E%3C/svg%3E") center / 24px no-repeat;
+  transition: transform .2s;
+}
+.audio-play:hover { transform: scale(1.08); }
+.audio-play.tocando {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 5h4v14H6zM14 5h4v14h-4z' fill='%23000'/%3E%3C/svg%3E");
+}
+.audio-trilha { position: relative; margin-top: 20px; height: 48px; }
+.audio-onda { display: flex; align-items: center; gap: 3px; height: 100%; }
+.audio-onda span {
+  flex: 1; border-radius: 99px; background: rgba(0,0,0,.22);
+  height: calc(var(--h) * 100%); transition: background-color .15s;
+}
+.audio-onda span.tocado { background: var(--laranja); }
+.audio-busca {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
+  opacity: 0; cursor: pointer;
+}
+.audio-trilha:has(.audio-busca:focus-visible) { outline: 3px solid var(--laranja); outline-offset: 3px; border-radius: 4px; }
+.audio-tempo { margin: 8px 0 0; font-size: .9rem; color: var(--cinza); font-variant-numeric: tabular-nums; }
+
 /* Serviços */
 .servicos-secao { background: var(--petroleo); color: var(--papel); }
 .servicos { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0 48px; }

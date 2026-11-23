@@ -61,6 +61,59 @@ dialog.querySelector('.fechar').addEventListener('click', fechar);
 dialog.addEventListener('click', (e) => { if (e.target === dialog) fechar(); });
 dialog.addEventListener('close', () => { quadro.innerHTML = ''; });
 
+// ---------- Peças de rádio (player de áudio) ----------
+// Cada peça tem uma onda decorativa; as barras ficam laranja conforme o áudio toca.
+// Um range invisível por cima da onda permite avançar/voltar (mouse, toque e teclado).
+const formatar = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+const audios = [...document.querySelectorAll('.audio')];
+audios.forEach((card, n) => {
+  const audio = card.querySelector('audio');
+  const botao = card.querySelector('.audio-play');
+  const busca = card.querySelector('.audio-busca');
+  const ondaAudio = card.querySelector('.audio-onda');
+  const atual = card.querySelector('.audio-atual');
+  const total = card.querySelector('.audio-total');
+  const titulo = card.querySelector('h3').textContent;
+
+  const qtd = 60;
+  for (let i = 0; i < qtd; i++) {
+    const v = Math.abs(Math.sin((i + n * 7) * 0.9) * 0.5 + Math.sin((i + n * 3) * 0.37) * 0.35 + Math.sin(i * 2.3) * 0.25);
+    const s = document.createElement('span');
+    s.style.setProperty('--h', Math.max(0.12, Math.min(1, 0.25 + v * 0.75)).toFixed(3));
+    ondaAudio.appendChild(s);
+  }
+  const barrasAudio = ondaAudio.children;
+
+  function atualizar() {
+    const d = audio.duration || 0;
+    const p = d ? audio.currentTime / d : 0;
+    const k = Math.round(p * qtd);
+    for (let i = 0; i < qtd; i++) barrasAudio[i].classList.toggle('tocado', i < k);
+    busca.value = (p * 100).toFixed(1);
+    busca.setAttribute('aria-valuetext', `${formatar(audio.currentTime)} de ${formatar(d)}`);
+    atual.textContent = formatar(audio.currentTime);
+  }
+
+  audio.addEventListener('loadedmetadata', () => { total.textContent = formatar(audio.duration); });
+  audio.addEventListener('timeupdate', atualizar);
+  audio.addEventListener('play', () => {
+    // só uma peça toca por vez
+    audios.forEach((c) => { const a = c.querySelector('audio'); if (a !== audio) a.pause(); });
+    botao.classList.add('tocando');
+    botao.setAttribute('aria-label', `Pausar ${titulo}`);
+  });
+  audio.addEventListener('pause', () => {
+    botao.classList.remove('tocando');
+    botao.setAttribute('aria-label', `Ouvir ${titulo}`);
+  });
+  audio.addEventListener('ended', () => { audio.currentTime = 0; atualizar(); });
+  botao.addEventListener('click', () => { audio.paused ? audio.play() : audio.pause(); });
+  busca.addEventListener('input', () => {
+    if (audio.duration) audio.currentTime = (busca.value / 100) * audio.duration;
+    atualizar();
+  });
+});
+
 // ---------- Formulário de orçamento ----------
 // Dois caminhos: WhatsApp (abre a conversa com a mensagem pronta) ou e-mail.
 const WHATSAPP_NUMERO = '5551993179195';   // só números, com 55 + DDD. Ex.: 5511999998888
